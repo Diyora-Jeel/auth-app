@@ -89,7 +89,7 @@ export const sendEmail = async (email, emailType, userId) => {
       service: 'gmail',
       auth: {
         user: "misterunknown967@gmail.com",
-        pass: "rwie mfpn ercx fbmk",
+        pass: "pcagxiqigxipwuez",
       },
     });
 
@@ -101,10 +101,12 @@ export const sendEmail = async (email, emailType, userId) => {
     };
 
     const mailRespons = await transport.sendMail(mailOption);
+    console.log("------- mailRespons ---------- ",mailRespons)
 
     return mailRespons;
     
   } catch (error) {
+    console.log("------- error ---------- ",error)
     throw new Error(error.message);
   }
 };
