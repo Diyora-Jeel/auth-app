@@ -89,13 +89,13 @@ export const sendEmail = async (email, emailType, userId) => {
       host: "live.smtp.mailtrap.io",
       port: 587,
       auth: {
-        user: "smtp@mailtrap.io",
+        user: "api",
         pass: "ee73004e556cd0cf848b3ec05904b3e8",
       },
     });
 
     const mailOption = {
-      from: "jeel@abc.com",
+      from: "smtp@mailtrap.io",
       to: email,
       subject: emailType === "VERIFY" ? "Verify your email" : "Reset your password",
       html: emailType === "VERIFY" ? verifyEmailHtml : resetPasswordHtml,
