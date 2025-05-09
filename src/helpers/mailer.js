@@ -1,10 +1,11 @@
 import prisma from "@/dbConfig/dbConfig.js";
 import nodemailer from "nodemailer";
-import bcrypt from "bcryptjs";
+import { v4 as uuidv4 } from 'uuid';
 
 export const sendEmail = async (email, emailType, userId) => {
   try {
-    const hashedToken = await bcrypt.hash(userId.toString(), 10);
+    
+    const hashedToken = uuidv4();
 
     const verifyEmailHtml = `
   <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
