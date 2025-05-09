@@ -95,7 +95,7 @@ export const sendEmail = async (email, emailType, userId) => {
     });
 
     const mailOption = {
-      from: "smtp@mailtrap.io",
+      from: "hello@demomailtrap.co",
       to: email,
       subject: emailType === "VERIFY" ? "Verify your email" : "Reset your password",
       html: emailType === "VERIFY" ? verifyEmailHtml : resetPasswordHtml,
