@@ -86,11 +86,11 @@ export const sendEmail = async (email, emailType, userId) => {
     }
 
     var transport = nodemailer.createTransport({
-      host: "sandbox.smtp.mailtrap.io",
-      port: 2525,
+      host: "live.smtp.mailtrap.io",
+      port: 587,
       auth: {
-        user: "ccf508f4aa4b8e",
-        pass: "a1d74ef17626a7",
+        user: "smtp@mailtrap.io",
+        pass: "ee73004e556cd0cf848b3ec05904b3e8",
       },
     });
 
