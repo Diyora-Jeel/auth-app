@@ -86,16 +86,15 @@ export const sendEmail = async (email, emailType, userId) => {
     }
 
     var transport = nodemailer.createTransport({
-      host: "live.smtp.mailtrap.io",
-      port: 587,
+      service: 'gmail',
       auth: {
-        user: "api",
-        pass: "ee73004e556cd0cf848b3ec05904b3e8",
+        user: "misterunknown967@gmail.com",
+        pass: "rwie mfpn ercx fbmk",
       },
     });
 
     const mailOption = {
-      from: "hello@demomailtrap.co",
+      from: "misterunknown967@gmail.com",
       to: email,
       subject: emailType === "VERIFY" ? "Verify your email" : "Reset your password",
       html: emailType === "VERIFY" ? verifyEmailHtml : resetPasswordHtml,
@@ -104,6 +103,7 @@ export const sendEmail = async (email, emailType, userId) => {
     const mailRespons = await transport.sendMail(mailOption);
 
     return mailRespons;
+    
   } catch (error) {
     throw new Error(error.message);
   }
