@@ -1,10 +1,10 @@
-'use client'
+"use client";
 import axios from "axios";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 export default function LoginPage() {
-
   const router = useRouter();
 
   const [user, setUser] = useState({
@@ -31,7 +31,7 @@ export default function LoginPage() {
             type="email"
             placeholder="Email"
             value={user.email}
-              onChange={(e) => setUser({...user,email : e.target.value})}
+            onChange={(e) => setUser({ ...user, email: e.target.value })}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-black focus:outline-none focus:ring-2 focus:ring-indigo-400"
           />
 
@@ -39,9 +39,17 @@ export default function LoginPage() {
             type="password"
             placeholder="Password"
             value={user.password}
-            onChange={(e) => setUser({...user,password : e.target.value})}
+            onChange={(e) => setUser({ ...user, password: e.target.value })}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-black focus:outline-none focus:ring-2 focus:ring-indigo-400"
           />
+
+          <div className="text-right">
+            <Link href="/forgotpassword"
+              className="text-sm text-indigo-600 hover:underline focus:outline-none"
+            >
+              Forgot Password?
+            </Link>
+          </div>
 
           <button
             onClick={onLogin}

@@ -1,10 +1,9 @@
 import prisma from "@/dbConfig/dbConfig.js";
 import nodemailer from "nodemailer";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 export const sendEmail = async (email, emailType, userId) => {
   try {
-    
     const hashedToken = uuidv4();
 
     const verifyEmailHtml = `
@@ -42,7 +41,7 @@ export const sendEmail = async (email, emailType, userId) => {
       You recently requested to reset your password. Click the button below to proceed:
     </p>
 
-    <a href="${process.env.DOMAIN}/forgotpassword?token=${hashedToken}" 
+    <a href="${process.env.DOMAIN}/verifyforgotpassword?token=${hashedToken}" 
        style="display: inline-block; margin: 20px 0; padding: 12px 20px; background-color: #dc3545; color: #fff; text-decoration: none; border-radius: 5px;">
       Reset Password
     </a>
@@ -52,7 +51,7 @@ export const sendEmail = async (email, emailType, userId) => {
     </p>
 
     <p style="font-size: 14px; color: #0070f3; word-break: break-all;">
-      ${process.env.DOMAIN}/forgotpassword?token=${hashedToken}
+      ${process.env.DOMAIN}/verifyforgotpassword?token=${hashedToken}
     </p>
 
     <p style="font-size: 12px; color: #aaa; margin-top: 40px;">
@@ -85,28 +84,35 @@ export const sendEmail = async (email, emailType, userId) => {
       });
     }
 
-    var transport = nodemailer.createTransport({
-      service: 'gmail',
+    // const transport = nodemailer.createTransport({
+    //   service: 'gmail',
+    //   auth: {
+    //     user: "misterunknown967@gmail.com",
+    //     pass: "pcagxiqigxipwuez",
+    //   },
+    // });
+
+    const transport = nodemailer.createTransport({
+      host: "sandbox.smtp.mailtrap.io",
+      port: 2525,
       auth: {
-        user: "misterunknown967@gmail.com",
-        pass: "pcagxiqigxipwuez",
+        user: "ccf508f4aa4b8e",
+        pass: "a1d74ef17626a7",
       },
     });
 
     const mailOption = {
-      from: "misterunknown967@gmail.com",
+      from: "jeel@gmail.com",
       to: email,
-      subject: emailType === "VERIFY" ? "Verify your email" : "Reset your password",
+      subject:
+        emailType === "VERIFY" ? "Verify your email" : "Reset your password",
       html: emailType === "VERIFY" ? verifyEmailHtml : resetPasswordHtml,
     };
 
     const mailRespons = await transport.sendMail(mailOption);
-    console.log("------- mailRespons ---------- ",mailRespons)
 
     return mailRespons;
-    
   } catch (error) {
-    console.log("------- error ---------- ",error)
     throw new Error(error.message);
   }
 };
