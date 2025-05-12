@@ -1,19 +1,16 @@
 'use client'
 
 import axios from "axios";
-// import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 export default function ForgotPasswordEmailPage() {
 
-  // const router = useRouter();
   const [email, setEmail] = useState("");
 
   const onEmailVerify = async () => {
     try {
       if (email != "") {
           const response = await axios.post("/api/forgotpassword", { email });
-          // router.push("/verifyforgotpassword");
       }
     } catch (error) {
        console.log(error.message)
@@ -27,7 +24,7 @@ export default function ForgotPasswordEmailPage() {
           Forgot Password
         </h1>
         <p className="text-sm text-gray-600 text-center">
-          Enter your email and we'll send you a password reset link.
+          {`Enter your email and we'll send you a password reset link`}
         </p>
         <div className="space-y-4">
           <input
